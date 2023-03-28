@@ -29,7 +29,7 @@
                             <h5 class="card-title">{{ $project->title }}</h5>
                         </div>
 
-                        <p class="slug card-text"><small class="text-muted">{{ $project->slug }}</small></p>
+                        {{-- <p class="slug card-text"><small class="text-muted">{{ $project->slug }}</small></p> --}}
 
                         <h6 class="pb-3">Tipo: {{ $project->type ? $project->type->name : 'Generico' }}</h6>
 
