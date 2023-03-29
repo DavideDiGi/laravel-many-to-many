@@ -35,6 +35,22 @@
                     </select>
                 </div>
 
+                <div class="technologies mb-2">Tecnologie utilizzate:</div>
+                @foreach ($technologies as $technology)
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" 
+                        name="technologies[]" 
+                        type="checkbox" 
+                        id="technology-{{ $technology->id }}" 
+                        @if (old('technologies') && is_array(old('technologies')) && count(old('technologies')) > 0)
+                            {{ in_array($technology->id, old('technologies')) ? 'checked' : '' }} 
+                        @endif
+                        value="{{ $technology->id }}">
+                        
+                        <label class="form-check-label" for="technology-{{ $technology->id }}">{{ $technology->id }} - {{ $technology->name }}</label>
+                    </div>
+                @endforeach
+
                 <div class="mb-3">
                     <label for="content" class="form-label">Descrizione<span>*</span></label>
                     <textarea class="form-control" rows="5" id="content" name="content" required placeholder="Inserisci una descrizione...">{{ old('content', $project->content) }}</textarea>

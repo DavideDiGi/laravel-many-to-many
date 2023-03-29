@@ -61,8 +61,8 @@ class ProjectController extends Controller
 
         $newProject = Project::create($data);
 
-        foreach ($data['technologies'] as $technologyId) {
-            $newProject->technologies()->attach($technologyId);
+        if (array_key_exists('technologies', $data)) {
+            $newProject->technologies()->sync($data['technologies']);
         }
 
         return redirect()->route('admin.projects.show', $newProject->id)->with('success', 'Progetto aggiunto con successo!');
@@ -130,11 +130,19 @@ class ProjectController extends Controller
 
         $project->update($data);
 
-        if ($oldTitle == $project->title && $oldContent == $project->content && $oldCover == $project->cover_pic) {
-            return redirect()->route('admin.projects.edit', $project->id)->with('success', 'Non hai modificato nessun dato');
+        if (array_key_exists('technologies', $data)) {
+            $project->technologies()->sync($data['technologies']);
         } else {
-            return redirect()->route('admin.projects.show', $project->id)->with('success', 'Progetto modificato con successo!');
+            $project->technologies()->detach();
         }
+
+        return redirect()->route('admin.projects.show', $project->id)->with('success', 'Progetto modificato con successo!');
+
+        // if ($oldTitle == $project->title && $oldContent == $project->content && $oldCover == $project->cover_pic) {
+        //     return redirect()->route('admin.projects.edit', $project->id)->with('success', 'Non hai modificato nessun dato');
+        // } else {
+        //     return redirect()->route('admin.projects.show', $project->id)->with('success', 'Progetto modificato con successo!');
+        // }
     }
 
     /**

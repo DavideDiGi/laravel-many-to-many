@@ -40,7 +40,13 @@
                 <div class="technologies mb-2">Tecnologie utilizzate:</div>
                 @foreach ($technologies as $technology)
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" name="technologies[]" type="checkbox" id="technology-{{ $technology->id }}" value="{{ $technology->id }}">
+                        <input class="form-check-input" 
+                        name="technologies[]" 
+                        type="checkbox" 
+                        id="technology-{{ $technology->id }}" 
+                        {{ in_array($technology->id, old('technologies', [])) ? 'checked' : '' }} 
+                        value="{{ $technology->id }}">
+                        
                         <label class="form-check-label" for="technology-{{ $technology->id }}">{{ $technology->name }}</label>
                     </div>
                 @endforeach
