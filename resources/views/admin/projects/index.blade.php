@@ -33,6 +33,8 @@
 
                         <h6 class="pb-3">Tipo: {{ $project->type ? $project->type->name : 'Generico' }}</h6>
 
+                        <h6 class="pb-3">Tecnologia: {{ $project->technology ? $project->technology->name : 'Non ancora selezionata' }}</h6>
+
                         <p class="content card-text">{{ $project->content }}</p>
 
                         @if ($project->cover_pic)

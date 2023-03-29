@@ -20,6 +20,7 @@
 
         <p class="title-slug small ">{{ $project->slug }}</p>
         <h4>Tipo progetto: {{ $project->type ? $project->type->name : 'Non definito' }}</h4>
+        <h4 class="pb-3">Tecnologia: {{ $project->technology ? $project->technology->name : 'Non ancora selezionata' }}</h4>
         <p class="card-text fw-light">{{ $project->content }}</p>
         @if ($project->cover_pic)
             <div class="pb-3">
