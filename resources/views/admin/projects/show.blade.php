@@ -9,18 +9,33 @@
     <div class="row justify-content-center">
 
         <div class="col d-flex">
-            <h2>{{ $project->id }}</h2>
-            <h2 class="mx-1"> - </h2>
-            <h2 class="card-title">{{ $project->title }}</h2>
+            <h3>{{ $project->id }}</h3>
+            <h3 class="mx-1"> - </h3>
+            <h3 class="card-title">{{ $project->title }}</h3>
         </div>
 
     </div>
 
     <div class="w-50 ms-5 pe-4 border-end pb-4 border-bottom">
 
-        <p class="title-slug small ">{{ $project->slug }}</p>
-        <h4>Tipo progetto: {{ $project->type ? $project->type->name : 'Non definito' }}</h4>
-        <h4 class="pb-3">Tecnologia: {{ $project->technology ? $project->technology->name : 'Non ancora selezionata' }}</h4>
+        {{-- <p class="title-slug small ">{{ $project->slug }}</p> --}}
+        <h5>Tipo progetto: {{ $project->type ? $project->type->name : 'Non definito' }}</h5>
+        <h5 class="d-inline-block">Tecnologie utilizzate: </h5>
+        {{-- <span class="pb-3 fw-bold">{{ $technology ? $technology->name : 'Non ancora selezionata' }} |</span> --}}
+        @if(count($project->technologies) > 0)
+            @foreach ($project->technologies as $technology)
+                <span class="pb-3 fw-bold">
+                    @if (!empty($technology->name)) 
+                        | {{ $technology->name }} |
+                    
+                    @endif
+                </span>
+            @endforeach
+        @else
+            <span class=" fs-5">
+                Nessuna tecnologia selezionata
+            </span>
+        @endif
         <p class="card-text fw-light">{{ $project->content }}</p>
         @if ($project->cover_pic)
             <div class="pb-3">

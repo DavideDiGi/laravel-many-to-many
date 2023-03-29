@@ -28,7 +28,7 @@ class StoreProjectRequest extends FormRequest
             'content' => 'required',
             'cover_pic' => 'nullable|image|max:8192',
             'type_id' => 'nullable|exists:types,id',
-            'technologies' => 'nullable|array|exists:tags,id'
+            'technologies' => 'nullable|array|exists:technologies,id'
         ];
     }
 }

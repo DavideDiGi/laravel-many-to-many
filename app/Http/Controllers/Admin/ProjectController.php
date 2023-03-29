@@ -122,13 +122,14 @@ class ProjectController extends Controller
             }
         }
 
-        $oldTitle = $project->title;
-        $oldContent = $project->content;
-        $oldCover = $project->cover_pic;
+        // $oldTitle = $project->title;
+        // $oldContent = $project->content;
+        // $oldCover = $project->cover_pic;
 
         $data['slug'] = Str::slug($data['title']);
 
         $project->update($data);
+
 
         if (array_key_exists('technologies', $data)) {
             $project->technologies()->sync($data['technologies']);

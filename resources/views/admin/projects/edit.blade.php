@@ -44,10 +44,12 @@
                         id="technology-{{ $technology->id }}" 
                         @if (old('technologies') && is_array(old('technologies')) && count(old('technologies')) > 0)
                             {{ in_array($technology->id, old('technologies')) ? 'checked' : '' }} 
+                        @elseif($project->technologies->contains($technology))
+                            checked
                         @endif
                         value="{{ $technology->id }}">
                         
-                        <label class="form-check-label" for="technology-{{ $technology->id }}">{{ $technology->id }} - {{ $technology->name }}</label>
+                        <label class="form-check-label" for="technology-{{ $technology->id }}">{{ $technology->name }}</label>
                     </div>
                 @endforeach
 

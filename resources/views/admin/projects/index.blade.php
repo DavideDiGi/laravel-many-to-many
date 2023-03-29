@@ -31,9 +31,21 @@
 
                         {{-- <p class="slug card-text"><small class="text-muted">{{ $project->slug }}</small></p> --}}
 
-                        <h6 class="pb-3">Tipo: {{ $project->type ? $project->type->name : 'Generico' }}</h6>
+                        <h6>Tipo: {{ $project->type ? $project->type->name : 'Generico' }}</h6>
 
-                        <h6 class="pb-3">Tecnologia: {{ $project->technology ? $project->technology->name : 'Non ancora selezionata' }}</h6>
+                        <div class="d-inline-block mb-3">Tecnologie utilizzate:</div>
+                        @if(count($project->technologies) > 0)
+                            @foreach ($project->technologies as $technology)
+                                <span class="pb-3 fw-bold">
+                                    @if (!empty($technology->name)) 
+                                        | {{ $technology->name }} |
+                                    
+                                    @endif
+                                </span>
+                            @endforeach
+                        @else
+                            Nessuna tecnologia selezionata
+                        @endif
 
                         <p class="content card-text">{{ $project->content }}</p>
 
