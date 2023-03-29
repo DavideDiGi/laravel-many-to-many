@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 
 // Models
 use App\Models\Type;
+use App\Models\Technology;
 
 class ProjectController extends Controller
 {
@@ -36,8 +37,9 @@ class ProjectController extends Controller
     public function create()
     {
         $types = Type::all();
+        $technologies = Technology::all();
 
-        return view('admin.projects.create', compact('types'));
+        return view('admin.projects.create', compact('types', 'technologies'));
     }
 
     /**
@@ -58,6 +60,10 @@ class ProjectController extends Controller
         $data['slug'] = Str::slug($data['title']);
 
         $newProject = Project::create($data);
+
+        foreach ($data['technologies'] as $technologyId) {
+            $newProject->technologies()->attach($technologyId);
+        }
 
         return redirect()->route('admin.projects.show', $newProject->id)->with('success', 'Progetto aggiunto con successo!');
     }
@@ -82,8 +88,10 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types = Type::all();
+        $technologies = Technology::all();
 
-        return view('admin.projects.edit', compact('project', 'types'));
+
+        return view('admin.projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**

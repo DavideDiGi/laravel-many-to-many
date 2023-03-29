@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="type_id" id="type_id" class="form-label">Tipo</label>
+                    <label for="type_id" id="type_id" class="form-label">Tipo: </label>
                     <select name="type_id" id="type_id">
                         <option value="">Generico</option>
                         @foreach ($types as $type)
@@ -37,7 +37,15 @@
                     </select>
                 </div>
 
-                <div class="mb-3">
+                <div class="technologies mb-2">Tecnologie utilizzate:</div>
+                @foreach ($technologies as $technology)
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" name="technologies[]" type="checkbox" id="technology-{{ $technology->id }}" value="{{ $technology->id }}">
+                        <label class="form-check-label" for="technology-{{ $technology->id }}">{{ $technology->name }}</label>
+                    </div>
+                @endforeach
+
+                <div class="my-3 ">
                     <label for="cover_pic" class="form-label">Inserisci una copertina</label>
                     <input type="file" class="form-control" id="cover_pic" name="cover_pic" accept="image/*"> 
                 </div>
